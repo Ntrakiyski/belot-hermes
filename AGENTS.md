@@ -1,0 +1,19 @@
+# Agent instructions — Belot
+
+Read `README.md` and all four files in `docs/` before structural changes. Player experience: four **real** signed-in humans; home Start Random Game / Create a Room. **No bot fill** in real games. `prototype/index.html` is engineering-only. Confirm owner decisions D01–D04; D05–D09 are autonomous defaults in `docs/01-game-product.md`.
+
+## Locked stack
+
+- Backend: **Go**, server-authoritative. Code under `services/game`; test with `cd services/game && go test ./...`.
+- UI: **React + Vite + TypeScript** under `apps/web`; build via npm in `apps/web`.
+- `prototype/`, `main/` and `demo/` directory snapshots are legacy references; Git branches `main` and `demo` define real environments.
+- GitHub repository is **public**. Never commit credentials or private customer/player data.
+
+## Work policy
+
+- Use `skills/feature-delivery/SKILL.md` on every code change; add `skills/gameplay-qa/SKILL.md` for game state/rules/matchmaking and `skills/admin-ops/SKILL.md` for moderation/incident/admin.
+- Work in feature branch from `demo`; tests before PR; no direct production merge or production secrets.
+- Treat score and hidden card integrity as security requirements. Server must validate every action, own all concealed cards and serialize turns. Do not trust user-supplied team, seat, hand or rules outcome.
+- Keep docs and acceptance tests synchronized with implementation. When game variants are uncertain, add golden fixtures and state exactly what remains unverified; do not silently guess.
+- `main` and `demo` folder HTML is an identical *initial static prototype snapshot*. Prefer editing `prototype/index.html` and running `npm run sync:prototype`, rather than maintaining two separate files. Actual environments are Git branches, not directories, once production app exists.
+- Any update sent to the owner must distinguish **implemented**, **tested**, **deployed on DEMO**, and **approved for MAIN**. Do not imply deployment just because a ZIP or commit exists.

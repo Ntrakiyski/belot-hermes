@@ -1,0 +1,13 @@
+{
+  "name": "belot-hermes-starter",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "description": "Belot human-multiplayer specification and offline engineering prototype; not production multiplayer",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "node scripts/sync-prototype.mjs --check && node --test tests/*.test.mjs",
+    "sync:prototype": "node scripts/sync-prototype.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

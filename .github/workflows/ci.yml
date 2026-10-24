@@ -1,0 +1,37 @@
+name: Belot validation
+on:
+  pull_request:
+    branches: [main, demo]
+  push:
+    branches: [main, demo]
+permissions:
+  contents: read
+jobs:
+  go-engine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: services/game/go.mod
+      - working-directory: services/game
+        run: go test ./...
+  react-vite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - working-directory: apps/web
+        run: npm install --no-audit --no-fund
+      - working-directory: apps/web
+        run: npm run build
+  legacy-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm run check
