@@ -33,7 +33,7 @@ First implement single regional server process so atomic queue and game events a
 | Audience | Owner, testers, Hermes | Public users |
 | Change entry | feature PR -> `demo` after green checks | Promotion PR from tested `demo` -> `main`, approved by human |
 | Database, Redis, secrets | Isolated sandbox | Separate production resources |
-| Discord Hermes write | Dev branch and demo deployment only | No direct merge/deploy bypass |
+| Telegram Hermes write | Dev branch and demo deployment only | No direct merge/deploy bypass |
 | Domain | `demo.<chosen-domain>` after hosting | `<chosen-domain>` after hosting |
 | Target code | Same app + environment config | Same app + environment config |
 
@@ -42,7 +42,7 @@ Create a **private GitHub repo** first. Default branch `main`. Keep all changes 
 ### CI/CD pipeline
 
 1. On PR: formatter/lint/type check, unit rules + queue tests, deterministic full-match fixtures, security & secret checks, build, browser smoke, license/dependency review.
-2. On approved merge to `demo`: deploy DEMO; verify health/readiness, websocket handshake, isolated sample match; report URL + commit and automated evidence to Discord.
+2. On approved merge to `demo`: deploy DEMO; verify health/readiness, websocket handshake, isolated sample match; report URL + commit and automated evidence to Telegram.
 3. Owner tests and explicitly authorizes promotion; open PR against `main`, verify required checks (including migrations/backward compatibility), get human approval.
 4. On `main` release: deploy production with backward-compatible migrations, smoke test, monitor, rollback on regression; preserve event/ruleset compatibility for in-progress matches.
 
@@ -60,4 +60,4 @@ Dashboard: online users, queue depth and latency, active matches, disconnect/for
 
 ## 6. Repo seed v0.1.0 vs target
 
-Present now: static offline practice prototype (three bots), four docs, three skills, isolated match-selection policy example with tests, CI template. Missing: signed-in user accounts, four-human matchmaking server, WebSocket play, private rooms, friends, Admin, actual cloud/demo deployments and Hermes integration. **Do not enable public launch until all P0 items pass.**
+Present now: static offline practice prototype (three bots), four docs, nine project skills, isolated match-selection policy example with tests, CI template. Missing: signed-in user accounts, four-human matchmaking server, WebSocket play, private rooms, friends, Admin, actual cloud/demo deployments and Hermes integration. **Do not enable public launch until all P0 items pass.**

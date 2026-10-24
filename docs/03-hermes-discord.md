@@ -1,53 +1,38 @@
-# Pillar 03 — Hermes on Discord: automated development and governed promotion
+# Pillar 03 — Hermes + Telegram autonomous development
 
-**Owner's goal:** speak/type feature ideas in English in an authorized Discord channel; Hermes turns them into work items, code and reviewable DEMO changes, then waits for human permission before MAIN. The integration is a planned workflow, not connected in seed v0.1.0.
+**Canonical communications:** Rado talks to one dedicated **Belot Builder Hermes profile** through Telegram, by voice or text in plain English. Discord was considered previously but is not the v1 primary channel. **Integration is planned, not installed on the user's VPS by this repository.**
 
-## 1. Workflow
+## 1. End-to-end workflow
 
-`Discord text/voice -> authorized Hermes gateway -> speech-to-text if needed -> task summary / GitHub issue -> isolated feature branch -> code + tests -> agent review -> PR to demo -> CI -> deploy DEMO -> Discord evidence + DEMO link -> owner's explicit acceptance -> human-reviewed PR to main -> production deploy + monitoring`.
+`Telegram voice/text -> Hermes transcript and intent interpretation -> high-impact clarification only if needed -> 80/20 scope -> GitHub issue/plan -> feature branch from demo -> implement Go/React + tests -> independent review -> PR to demo -> CI -> deployed DEMO with restricted rules inspector -> Rado tests on phone -> explicit MAIN approval -> reviewed promotion PR -> production deploy and smoke test`.
 
-Recommended channels: `#belot-ideas` (feature input), `#belot-builds` (progress and demo artifacts), `#belot-releases` (approvals/receipts), `#belot-incidents` (restricted), optional voice channel. Restrict code requests to allowlisted Discord identity/role; a public player's content must never become commands.
+Rado need not use GitHub or know Git terminology. Hermes should translate product language into acceptance checks, select skills automatically, educate Rado gradually and offer sound recommendations.
 
-## 2. Three agent skills
+## 2. Skills and automatic routing
 
-- `skills/feature-delivery/SKILL.md`: turn intent into scoped issue, implementation/test/PR, DEMO evidence, promotion gate.
-- `skills/gameplay-qa/SKILL.md`: rules fixtures, card security, multi-client/reconnect/score validation.
-- `skills/admin-ops/SKILL.md`: player reports, score disputes, queue incidents, sanitized audit and reversible remediation.
+Project-local skills in `.hermes/skills/`: `understand-rado`, `product-80-20`, `feature-planning`, `implementation-quality`, `belot-rules-verification`, `demo-inspector`, `review-and-release`, `teach-while-building`, `skill-discovery`. The agent proactively loads relevant skills from natural-language intent. `AGENTS.md` is the routing and security contract; `ops/hermes/SOUL.md` defines Rado-aware behavior. Existing root `skills/` are retained as legacy reference and are not sufficient for Hermes project discovery.
 
-Hermes should load the relevant skill automatically based on requested task, and all code tasks should use feature-delivery plus relevant QA. Skills are **documentation**, not actual installed/run bots.
+**Find Skills**: the official CLI can discover additional skills; install/enable on the dedicated VPS profile only after source/code/permission review. Skills cannot override Belot game integrity or MAIN approval rules.
 
-## 3. Permissions and guardrails
+## 3. Boundaries and approvals
 
-| Allowed without owner intervention | Requires explicit owner/human approval |
-|---|---|
-| Read code, docs and nonsecret logs; create issue and feature branch; modify code in isolated sandbox; add tests; open PR to `demo`; run CI; report DEMO link after verified deploy | Production promotion; deploy with privileged production secret; destructive DB migration; changes to auth/security policies; payment/billing changes; new external permissions; user data export |
+Hermes may decide reversible MVP defaults, create feature branches, code, tests, PRs into DEMO and run sandbox tests. It must obtain meaningful operator approval before executing newly discovered untrusted scripts or granting credentials. MAIN promotions, material data deletion, new production permissions, major spend and policy changes require explicit human authorization. Public GitHub repo: never add credentials or private player data.
 
-- Hermes uses dedicated GitHub App or fine-grained account with repo-scoped permissions; no direct pushes to protected `main`.
-- Approval must be backed by GitHub PR/review ruleset, not merely a prompt. Voice-only promotion is not sufficient: human confirms explicitly in trusted approval path.
-- Runtime has no production DB credentials, no broad organization admin token and no access to private cards. Run code in ephemeral sandbox/worktree with time/resources limits and egress controls.
-- Security policies remain enforced even if Discord input says to skip tests or merge directly. Refuse unsafe tasks and explain. Avoid committing secret values, transcripts containing private data, or database dumps.
-- Every proposed merge includes Git commit SHA, changed files, test evidence, known limitations, DEMO URL (if actually deployed), rollback plan and acceptance result.
+- Do not grant the Telegram runtime production DB credentials or release authority.
+- Rado's Telegram identity must be allowlisted; ordinary player content must not become agent instructions.
+- Rule changes require independently checked deterministic fixtures and a documented ruleset version.
+- Demo inspector data must be isolated, staff-authorized and impossible to expose in MAIN through a client flag.
+- Feature status must distinguish **coded, tested, in GitHub, deployed to Demo and live in Main**.
 
-## 4. Standard feature receipt
+## 4. Feature update format for Rado
 
-```text
-BEL-### — feature title
-Understood: concise expected player behavior
-Changed: files/PR + commit
-Tests: commands and green/failing evidence
-DEMO: real link or "not deployed"
-Risks: known limitations
-Next: Await owner acceptance / production approval
-```
+- **I understood:** one sentence about the user problem.
+- **I changed:** the minimal behavior.
+- **Try it in Demo:** only a *verified* URL with 2–3 tap steps, else say "not deployed".
+- **Verified:** tests, replay evidence and known gaps.
+- **One useful concept:** optional, one short explanation.
+- **Next:** follow-up or request explicit approval for a specified production release.
 
-## 5. Decisions and autonomy
+## 5. Setup prerequisites and proof
 
-Owner delegated routine product decisions to the assistant for specification work (D05–D09 in Pillar 01). That is **not** authorization for Hermes to grant itself production release permission. Agent can choose reasonable non-destructive defaults, log them, and ask only if critical safety/security/release approval is required. If change has competitive integrity impact, the QA skill must verify rules against fixtures and record the rulesetVersion.
-
-## 6. Setup prerequisites (not yet configured)
-
-1. GitHub private repo with `main`+`demo` branches and protected `main`.
-2. Discord bot/app, owner identity allowlist, approved channels and voice transcription setup.
-3. Always-on Hermes host with code execution sandbox, fine-grained repository credentials and isolated DEMO build/deploy secrets.
-4. GitHub Actions workflows, hosted DEMO API/frontend and separate MAIN hosting/databases.
-5. Test owner voice/text request -> GitHub PR -> verified DEMO -> human approval -> MAIN and rollback.
+Dedicated Hermes VPS profile, private Telegram token/allowlist, trusted project checkout, GitHub feature-write permissions, restricted DEMO deployment secrets, GitHub CI/branch protections and isolated environment/database. Follow `docs/09-hermes-vps-setup.md` and `docs/05-development-playbook.md`. Required acceptance: Rado sends a vague voice note, Hermes creates/test/reviews a feature, reports real DEMO evidence, and MAIN stays unchanged until a clear human-approved promotion.

@@ -24,7 +24,7 @@
 
 ## Persona 3 — Owner and Hermes developer: voice-to-demo-to-main
 
-`owner Discord message -> Hermes task issue -> isolated branch -> implement -> tests incl. gameplay QA -> review -> demo PR -> CI -> deploy DEMO -> report link/test proof -> owner accepts -> protected main promotion PR and human review -> deploy MAIN -> smoke/rollback-ready`.
+`Rado Telegram message -> Hermes task issue -> isolated branch -> implement -> tests incl. gameplay QA -> review -> demo PR -> CI -> deploy DEMO -> report link/test proof -> owner accepts -> protected main promotion PR and human review -> deploy MAIN -> smoke/rollback-ready`.
 
 **Contract:** Hermes may autonomously implement/test DEMO within prescribed permissions, but **cannot self-authorize MAIN**. No link must be reported as deployed before verification.
 
@@ -42,10 +42,10 @@
 
 ## Build milestones (in execution order)
 
-- **M0 — Repository seed v0.1.0 (this delivery):** four authoritative specs + five defaulted decisions, three skills, AGENTS.md, static browser-only dev prototype, deterministic matchmaking-policy utility and Node tests, CI template, local git initial history. No human multiplayer yet.
+- **M0 — Repository seed v0.1.0 (this delivery):** four authoritative specs + five defaulted decisions, nine project skills, AGENTS.md, static browser-only dev prototype, deterministic matchmaking-policy utility and Node tests, CI template, local git initial history. No human multiplayer yet.
 - **M1 — Shared online engine and identity:** TypeScript authoritative Belot engine + deterministic fixtures, authenticated users + usernames, WebSocket game server, four human seats. Server-owned shuffle/actions/reconnect.
 - **M2 — Entry flows/social:** signed-in home, solo/duo public matchmaker D01–D08, Create Room D09, friendship, profile overlay and username invites. End-to-end real-device multiplayer acceptance.
-- **M3 — DevOps and agent:** protected GitHub `main`/`demo`, isolated deployment and databases, CI E2E, admin dashboard, Discord Hermes + 3 skills, feature PR to DEMO workflow.
+- **M3 — DevOps and agent:** protected GitHub `main`/`demo`, isolated deployment and databases, CI E2E, admin dashboard, Telegram Hermes + 9 project skills, feature PR to DEMO workflow.
 - **M4 — Public beta and release:** automated load/latency/security tests, moderation, observability, audited production promotion and rollback. Actual MAIN release only after owner approval.
 
 ## Definition of done for an individual change

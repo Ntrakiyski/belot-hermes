@@ -12,3 +12,10 @@
 ## 0.1.0 — 2026-10-24
 
 - Bootstrap four product pillars, nine matchmaking decisions, three agent skills, legacy browser prototype and Node policy tests.
+
+## Workspace v1 handoff — 2026-10-24
+
+- Give Rado one dedicated Telegram Hermes builder profile, simple communication contract and incremental learning approach.
+- Add nine project-local Hermes skills with automatic routing, Find Skills discovery/review guardrails and a complete feature-to-production lifecycle.
+- Add independent rules verification, planned DEMO inspector/replay, phased roadmap, VPS setup and release/approval procedures.
+- Preserve user-approved gameplay decisions; no new multiplayer feature implementation claimed.

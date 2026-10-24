@@ -8,7 +8,7 @@
 - Random queue accepts one solo or a duo of friends; prefer duo-v-duo and four-solo matches, with 5–15s fallback to mixed. Three-second countdown once four connected accounts are matched.
 - Private rooms: unique usernames, friends, invitations, four human seats and host-managed teams.
 - Profiles: tap a player, add friend, block/report. No hidden hand exposure.
-- Hermes works from Discord into the `demo` Git branch and its deployment; production `main` requires explicit human review.
+- Rado talks to Hermes from Telegram; Hermes works into the `demo` Git branch and its deployment; production `main` requires explicit human review.
 
 ## Locked technology stack
 
@@ -67,5 +67,5 @@ AGENTS.md                 Agent work policy and security constraints
 1. Implement the **Go rules engine** (deal five-plus-three, bids/contracts, legal moves, declarations, scoring and validated golden fixtures).
 2. Implement authenticated human identities, Go WebSocket event broker and server-owned matches.
 3. Connect React Start Random Game / Create Room to real Go endpoints, friends and invites; no bot fill.
-4. Provision **separate DEMO and MAIN** hosting/data, CI protections and Discord Hermes agent workflow.
+4. Provision **separate DEMO and MAIN** hosting/data, CI protections and Telegram Hermes agent workflow.
 5. Release only after rule, multiplayer, security and reconnection acceptance criteria pass.
