@@ -1,5 +1,8 @@
 # Agent instructions — Belot
 
+> **MANDATORY FIRST READ: [CONSTITUTION.md](CONSTITUTION.md)** — the governing product vision and operating contract for Hermes, Codex and all development agents. Read it **before** skills, plans, tool use or code changes; follow its rules for Rado's nontechnical Telegram workflow, 80/20 delivery, rules verification, and explicit MAIN approval. If another instruction conflicts, surface the conflict rather than silently overriding this Constitution.
+
+
 Read `README.md` and all four files in `docs/` before structural changes. Player experience: four **real** signed-in humans; home Start Random Game / Create a Room. **No bot fill** in real games. `prototype/index.html` is engineering-only. Confirm owner decisions D01–D04; D05–D09 are autonomous defaults in `docs/01-game-product.md`.
 
 ## Locked stack
