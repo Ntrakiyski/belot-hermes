@@ -17,3 +17,6 @@
 - Hermes can auto-select skills via project-local discovery after checkout trust and appropriate working directory. Triggering by natural language is the default; Rado should never type `/skill`.
 
 Official docs: https://hermes-agent.nousresearch.com/docs/user-guide/features/skills and https://hermes-agent.nousresearch.com/docs/user-guide/messaging/telegram
+
+## Verify Niki's mentor skill in the Rado profile
+After the profile checks out the development workspace and trusts its project-local skills, confirm that `ask-niki` appears in the loaded skill list. From Rado's authorized Telegram session, try: **"What would Niki tell me if I don't know how to code but want to improve Belot?"** The agent should respond with a short product-owner principle and a practical next step, not a technical lecture or a fabricated message to Niki. Ask for **"the full Niki message"** to confirm it reads `.hermes/skills/ask-niki/references/message-to-rado.md`. If skill discovery requires a reload/restart, do it only for the isolated Rado profile and verify the main Hermes profile remains unaffected.
