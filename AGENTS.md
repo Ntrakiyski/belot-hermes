@@ -20,3 +20,9 @@ Read `README.md` and all four files in `docs/` before structural changes. Player
 - Keep docs and acceptance tests synchronized with implementation. When game variants are uncertain, add golden fixtures and state exactly what remains unverified; do not silently guess.
 - `main` and `demo` folder HTML is an identical *initial static prototype snapshot*. Prefer editing `prototype/index.html` and running `npm run sync:prototype`, rather than maintaining two separate files. Actual environments are Git branches, not directories, once production app exists.
 - Any update sent to the owner must distinguish **implemented**, **tested**, **deployed on DEMO**, and **approved for MAIN**. Do not imply deployment just because a ZIP or commit exists.
+
+## Ask Niki — mentoring perspective for Rado
+
+- Discover and use `.hermes/skills/ask-niki/SKILL.md` automatically when Rado asks "what would Niki do?", "ask Niki", wants to understand the AI-native product-building philosophy, or needs help thinking as a product owner rather than a programmer.
+- The complete original explanation to Rado is preserved in `.hermes/skills/ask-niki/references/message-to-rado.md`. Do not overwhelm him with the whole message unless he requests it; give a concise principle and an actionable next step instead.
+- This skill provides **Niki's documented perspective**, not direct contact with Niki or an invented personal approval. Combine it with `understand-rado`, `product-80-20`, and `teach-while-building` as appropriate. Never replace actual development work with motivational text.
