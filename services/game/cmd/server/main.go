@@ -13,9 +13,10 @@ func main() {
 	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		_ = json.NewEncoder(w).Encode(map[string]any{
-			"status": "ok", "service": "belot-go-engine", "multiplayerReady": false,
+			"status": "ok", "service": "belot-go-engine", "multiplayerReady": false, "practiceTables": true,
 		})
 	})
+	newStore().routes(mux)
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8081"
