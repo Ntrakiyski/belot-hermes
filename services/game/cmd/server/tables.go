@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"os"
 	"strings"
 	"sync"
 
@@ -41,7 +42,9 @@ func randHex(n int) string {
 func (s *store) routes(mux *http.ServeMux) {
 	mux.HandleFunc("POST /api/tables", s.create)
 	mux.HandleFunc("POST /api/tables/{id}/join", s.join)
-	mux.HandleFunc("POST /api/tables/{id}/bots", s.addBots)
+	if os.Getenv("ENABLE_PRACTICE_BOTS") == "1" { // DEMO only; never on MAIN
+		mux.HandleFunc("POST /api/tables/{id}/bots", s.addBots)
+	}
 	mux.HandleFunc("GET /api/tables/{id}", s.state)
 	mux.HandleFunc("POST /api/tables/{id}/bid", s.bid)
 	mux.HandleFunc("POST /api/tables/{id}/play", s.play)

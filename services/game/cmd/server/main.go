@@ -17,6 +17,9 @@ func main() {
 		})
 	})
 	newStore().routes(mux)
+	if dir := os.Getenv("STATIC_DIR"); dir != "" {
+		mux.Handle("/", http.FileServer(http.Dir(dir)))
+	}
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8081"
