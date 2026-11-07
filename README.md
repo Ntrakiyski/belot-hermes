@@ -1,6 +1,6 @@
 # Belot — Hermes-managed Bulgarian multiplayer card game
 
-**Engineering seed v0.2.0 (2026-10-24) · Public repo · NOT yet online multiplayer.**
+**DEMO engineering build · Public repo · Guest tables and optional practice bots, not the authenticated multiplayer product.**
 
 ## Product contract
 
@@ -22,12 +22,12 @@
 
 ## What's implemented today
 
-- Working **Go 32-card deck model**, cryptographically secure shuffle, exact four-hand deal with validation and unit tests; `/healthz` HTTP endpoint reports server process only. The bidding-stage five-plus-three deal and legal move/scoring rules are **not** yet implemented.
-- React + Vite + TypeScript home screen scaffold with the two intended primary buttons, **disabled** until real authentication/matchmaking/rooms exist. Connects to Go `/healthz` in local dev.
-- Four authoritative product/architecture/agent/workflow documents and three Hermes SKILL.md starter files.
-- Standalone JavaScript matchmaking composition-policy example with automated tests.
-- Separate legacy single-human/three-bot HTML reference under `prototype/`, `main/`, `demo/`. These are **local snapshots, not deploys**.
-- CI definition; GitHub setup/rules and live deployment are separate operations.
+- Go rules engine and HTTP table API: guest table codes, four seats, bidding, legal card play, deal scoring and next deal. Tables live in memory and disappear on restart. Rules have local tests, not independent certification of every Bulgarian variant.
+- React UI for creating/joining guest tables and playing deals. Accounts, public matchmaking, friends, reconnect/forfeit policy and the secured rules inspector remain unimplemented.
+- Optional **explicit practice bots**, enabled server-side only with `ENABLE_PRACTICE_BOTS=1` on DEMO. Default is off; never enable on MAIN. The current UI still shows the practice button when the route is disabled.
+- One Docker image serves React and Go on port 3000; Docker Compose reuses that image build. No database or Redis is used yet.
+- Go tests, React build, legacy Node checks and a Compose HTTP smoke workflow. CI configuration is not evidence that a particular run passed.
+- Dedicated Telegram Hermes profile documented under `ops/hermes/`; see the [operations runbook](docs/12-coolify-operations.md) for verified state, gaps and migration.
 
 ## Local development
 
@@ -62,10 +62,24 @@ AGENTS.md                 Agent work policy and security constraints
 .github/workflows/ci.yml  Go + React + Node validation
 ```
 
+## Docker Compose
+
+```bash
+# Local game, bots disabled; UI and API on http://localhost:3000
+docker compose -f docker-compose.yaml -f docker-compose.local.yaml up --build -d --wait
+npm run smoke:game
+
+# Optional local practice, recreates the container and loses existing tables
+ENABLE_PRACTICE_BOTS=1 docker compose -f docker-compose.yaml -f docker-compose.local.yaml up -d --wait
+npm run smoke:game -- --practice
+```
+
+For Coolify use **only `docker-compose.yaml`**, assign domains to service `belot` at internal port 3000, and follow [the migration and rollback procedure](docs/12-coolify-operations.md). The local override binds only to loopback. Compose orchestrates the service; the existing Dockerfile still builds it.
+
 ## Next milestones
 
-1. Implement the **Go rules engine** (deal five-plus-three, bids/contracts, legal moves, declarations, scoring and validated golden fixtures).
-2. Implement authenticated human identities, Go WebSocket event broker and server-owned matches.
-3. Connect React Start Random Game / Create Room to real Go endpoints, friends and invites; no bot fill.
-4. Provision **separate DEMO and MAIN** hosting/data, CI protections and Telegram Hermes agent workflow.
-5. Release only after rule, multiplayer, security and reconnection acceptance criteria pass.
+1. Independently verify rules with golden fixtures and a secured DEMO inspector.
+2. Implement authenticated identities, real multiplayer connectivity and reconnect handling.
+3. Build public matchmaking, private room permissions, friends and invitations.
+4. Verify Rado's Telegram text/voice → feature → tests → DEMO workflow and release gates.
+5. Promote a tested version to MAIN only after explicit Rado approval and human review.

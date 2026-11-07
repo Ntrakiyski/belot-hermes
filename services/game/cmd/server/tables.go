@@ -161,7 +161,8 @@ func (s *store) addBots(w http.ResponseWriter, r *http.Request) {
 	}
 	t.mu.Lock()
 	defer t.mu.Unlock()
-	if _, ok := t.auth(r); !ok {
+	me, ok := t.auth(r)
+	if !ok {
 		fail(w, 403, "not seated at this table")
 		return
 	}
@@ -173,7 +174,7 @@ func (s *store) addBots(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	t.maybeStart()
-	writeJSON(w, 200, map[string]int{"added": n})
+	writeJSON(w, 200, t.viewFor(me))
 }
 
 func (t *table) hasBots() bool {

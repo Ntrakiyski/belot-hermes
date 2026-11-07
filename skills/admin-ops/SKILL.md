@@ -10,4 +10,4 @@ description: Operate Belot admin workflows for queue incidents, player reports, 
 3. For long queue: inspect real queue counts/ticket ages, fairness fallback D02/D03 and D05/D06 ghosts; never invent a bot to solve queue shortages.
 4. For disconnect/forfeit: verify D08 grace, resumed event sequence, idempotent timeout and explicit reason, not ad-hoc score changes.
 5. For release: check real health dashboard/deployment hash, errors/latency and backwards-compatible migration; rollback only via authorized production procedure.
-6. Record all admin reads/mutations according to audit policy. Share anonymized incident summary with owner; never paste production secrets, tokens, private user fields or other hidden game state in Discord.
+6. Record all admin reads/mutations according to audit policy. Share anonymized incident summary with owner; never paste production secrets, tokens, private user fields or other hidden game state in Telegram.

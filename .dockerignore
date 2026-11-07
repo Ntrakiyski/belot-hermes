@@ -1,4 +1,8 @@
-node_modules
+**/node_modules
 .git
 .wrangler
-apps/web/dist
+**/.wrangler
+**/dist
+**/*.tsbuildinfo
+.env
+.env.*

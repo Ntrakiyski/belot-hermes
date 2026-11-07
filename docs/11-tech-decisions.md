@@ -9,3 +9,5 @@
 - **2026-10-24 — Find Skills:** external discovery with source/script review and restricted permissions, not auto-execution of arbitrary community scripts.
 
 Changes to architecture should add a dated entry describing trade-off, rejected options, security impact and reversible migration.
+
+- **2026-11-07 — Compose on Coolify:** retain the existing single-image Go + React build, add a one-service Compose manifest with no host ports, and use a loopback port override locally. No unused database/Redis. Bots default off. Git-based Coolify deployment replaces static Pages instructions; hosting migration and live persona sync require operator authorization. Container replacement loses in-memory tables, so migrate while testers are idle. MAIN promotion remains separately gated.

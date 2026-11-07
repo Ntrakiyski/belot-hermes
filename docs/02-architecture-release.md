@@ -5,16 +5,16 @@
 ## 1. Implementation architecture (target)
 
 ```text
-Mobile/desktop browser (Bulgarian React/Next.js or Vite SPA)
+Mobile/desktop browser (Bulgarian React + Vite + TypeScript SPA)
   -> HTTP authentication + profile/friends/invitation API
   -> persistent WebSocket multiplayer connection
-  -> authoritative Node.js game server + pure TypeScript Belot rules package
+  -> authoritative Go game server + pure Go Belot rules package
   -> PostgreSQL (accounts, games, scores, friend events, replay history)
   -> Redis (distributed matchmaking queue, presence, reconnect tokens, optional)
   -> structured audit/telemetry + admin dashboard (/admin, RBAC + MFA)
 ```
 
-First implement single regional server process so atomic queue and game events are correct; Redis becomes appropriate with multiple instances. Stateless frontends can use Vercel or equivalent, but websocket server must run in a persistent container/VPS. Choose deployment provider after tests; **do not infer that this repository is deployed**.
+First implement single regional server process so atomic queue and game events are correct; Redis becomes appropriate with multiple instances. Stateless frontends can use Vercel or equivalent, but websocket server must run in a persistent container/VPS. The current combined Go + React DEMO runs on Coolify; see `docs/12-coolify-operations.md`. Target multiplayer and persistence remain unimplemented.
 
 ## 2. Trust and data isolation
 
@@ -37,7 +37,7 @@ First implement single regional server process so atomic queue and game events a
 | Domain | `demo.<chosen-domain>` after hosting | `<chosen-domain>` after hosting |
 | Target code | Same app + environment config | Same app + environment config |
 
-Create a **private GitHub repo** first. Default branch `main`. Keep all changes on feature branches, review before merging to `demo`; enable repository ruleset/protection on `main` requiring green CI, human approval and no force pushes. Create deployment environments `demo` and `production` in hosting; production secrets and write credentials never accessible to Hermes runtime. A successful Git commit is NOT automatically a successful deployment.
+The GitHub repository is **public**; never commit secrets or player data. Default branch `main`. Keep all changes on feature branches, review before merging to `demo`; enable repository ruleset/protection on `main` requiring green CI, human approval and no force pushes. Create deployment environments `demo` and `production` in hosting; production secrets and write credentials never accessible to Hermes runtime. A successful Git commit is NOT automatically a successful deployment.
 
 ### CI/CD pipeline
 

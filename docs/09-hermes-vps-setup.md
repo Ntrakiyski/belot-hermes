@@ -1,6 +1,6 @@
 # VPS handoff — dedicated Rado Hermes profile
 
-**Not executed on the VPS by this repository author.** Run after cloning the public repository on your VPS, using the existing Hermes installation. Follow current official Hermes docs before changing live config.
+**Initial setup reference.** A dedicated profile now exists; see [current operations evidence and gaps](12-coolify-operations.md) before creating/reconfiguring anything. The initial instructions below were not execution evidence from the repository author. Run after cloning the public repository on your VPS, using the existing Hermes installation. Follow current official Hermes docs before changing live config.
 
 1. `hermes profile create belot-rado` — separate config, sessions, memory, tools and skills from other Hermes profiles. Then `belot-rado setup` (credentials via secure local terminal, not Git or Telegram).
 2. Clone `https://github.com/Ntrakiyski/belot-hermes.git` and launch the dedicated profile with the repo as its working directory.
