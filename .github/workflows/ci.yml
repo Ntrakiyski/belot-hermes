@@ -35,3 +35,16 @@ jobs:
         with:
           node-version: '22'
       - run: npm run check
+  compose-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: docker compose -f docker-compose.yaml -f docker-compose.local.yaml up --build -d --wait
+      - run: npm run smoke:game
+      - run: ENABLE_PRACTICE_BOTS=1 docker compose -f docker-compose.yaml -f docker-compose.local.yaml up -d --wait
+      - run: npm run smoke:game -- --practice
+      - if: always()
+        run: docker compose logs --tail 30 && docker compose down

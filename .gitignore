@@ -13,3 +13,6 @@ dist/
 .hermes/sessions/
 *.db
 *.sqlite
+
+*.tsbuildinfo
+.wrangler/
