@@ -1,9 +1,9 @@
 ---
 name: understand-rado
-description: Convert Rado's vague Telegram voice or text requests into scoped, testable Belot changes without technical interrogation.
+description: Convert Rado's vague Telegram text requests into scoped, testable Belot changes without technical interrogation.
 ---
 # Interpret Rado's requests
-Trigger automatically for unclear, emotional, fragmented or incomplete statements. Treat speech-to-text as possibly mistaken.
+Trigger automatically for unclear, emotional, fragmented or incomplete statements.
 
 1. Reflect the **player problem** in one short sentence. Look at current behavior and project docs; do not invent context.
 2. Infer the likely action, user-visible result and expected benefit. Separate observations from assumptions. Offer one small sensible default.

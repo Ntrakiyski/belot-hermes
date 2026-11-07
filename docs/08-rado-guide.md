@@ -1,6 +1,6 @@
 # Rado's guide — no coding knowledge required
 
-Talk to your dedicated Hermes bot in Telegram, in voice or text. Describe **the result you want**; code terminology is optional.
+Talk to your dedicated Hermes bot in Telegram, by text. Describe **the result you want**; code terminology is optional.
 
 Examples:
 - "When I tap Start Random Game, I want to see how many players we're waiting for."

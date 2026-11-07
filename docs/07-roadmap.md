@@ -2,12 +2,16 @@
 
 **Version 1 = engineering workspace**, not multiplayer launch.
 
-## v1 (this handoff)
+## Initial engineering handoff (historical)
 - Canonical business pillars, autonomous engineering playbook, Rado interaction policy, nine focused project skills, VPS profile setup and migration notes.
 - Repo with `main` / `demo`, Go backend card-deck starter, React/Vite UI scaffold, tests and CI definition.
 - No claim of live Telegram integration or deployed environments. The owner sets up the isolated VPS Hermes profile and bot with credentials outside Git.
 
-## Smallest useful implementation sequence for Hermes
+## Current implemented slice
+
+v0.3 provides server-authoritative guest/practice deals, declarations and explained scores, with deterministic fixtures and a phone UI. Git merges into DEMO automatically deploy through Coolify. Hermes' dedicated Telegram profile exists; use `belot-maintenance` and the current operations evidence rather than the historical handoff state. Authenticated four-human acceptance and production release remain unfulfilled.
+
+## Remaining implementation sequence for Hermes
 **Slice A — rules before multiplayer:** pure Go deal/bid/turn/score engine and golden tests. Success: reproducible full deal and point explanation without browser.
 **Slice B — playable local four-seat fixture:** React table reading server-controlled state, deterministic test players only; authorized DEMO inspector with step/replay/legality reasons.
 **Slice C — first four humans:** minimal accounts, one match lobby, WebSocket turn events, reconnect and anti-leak tests. The first public-real multiplayer proof is 4 separate authenticated devices completing a match.

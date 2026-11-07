@@ -1,10 +1,10 @@
 # Pillar 03 — Hermes + Telegram autonomous development
 
-**Canonical communications:** Rado talks to one dedicated **Belot Builder Hermes profile** through Telegram, by voice or text in plain English. Discord was considered previously but is not the v1 primary channel. **Integration is planned, not installed on the user's VPS by this repository.**
+**Canonical communications:** Rado talks to one dedicated **Belot Builder Hermes profile** through Telegram, by text in plain English. Discord was considered previously but is not the v1 primary channel. **A dedicated Telegram profile is installed; current operating evidence and remaining checks are in `ops/hermes/VPS-PROFILE.md` and `docs/12-coolify-operations.md`.**
 
 ## 1. End-to-end workflow
 
-`Telegram voice/text -> Hermes transcript and intent interpretation -> high-impact clarification only if needed -> 80/20 scope -> GitHub issue/plan -> feature branch from demo -> implement Go/React + tests -> independent review -> PR to demo -> CI -> deployed DEMO with restricted rules inspector -> Rado tests on phone -> explicit MAIN approval -> reviewed promotion PR -> production deploy and smoke test`.
+`Telegram text -> Hermes intent interpretation -> high-impact clarification only if needed -> 80/20 scope -> GitHub issue/plan -> feature branch from demo -> implement Go/React + tests -> independent review -> PR to demo -> CI -> deployed DEMO with restricted rules inspector -> Rado tests on phone -> explicit MAIN approval -> reviewed promotion PR -> production deploy and smoke test`.
 
 Rado need not use GitHub or know Git terminology. Hermes should translate product language into acceptance checks, select skills automatically, educate Rado gradually and offer sound recommendations.
 
@@ -35,4 +35,4 @@ Hermes may decide reversible MVP defaults, create feature branches, code, tests,
 
 ## 5. Setup prerequisites and proof
 
-Dedicated Hermes VPS profile, private Telegram token/allowlist, trusted project checkout, GitHub feature-write permissions, restricted DEMO deployment secrets, GitHub CI/branch protections and isolated environment/database. Follow `docs/09-hermes-vps-setup.md` and `docs/05-development-playbook.md`. Required acceptance: Rado sends a vague voice note, Hermes creates/test/reviews a feature, reports real DEMO evidence, and MAIN stays unchanged until a clear human-approved promotion.
+Dedicated Hermes VPS profile, private Telegram token/allowlist, trusted project checkout, GitHub feature-write permissions, restricted DEMO deployment secrets, GitHub CI/branch protections and isolated environment/database. Follow `docs/09-hermes-vps-setup.md` and `docs/05-development-playbook.md`. Required acceptance: Rado sends a vague text request, Hermes creates/test/reviews a feature, reports real DEMO evidence, and MAIN stays unchanged until a clear human-approved promotion.

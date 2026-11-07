@@ -3,7 +3,7 @@
 **Owner:** Rado (nontechnical). **Builder:** dedicated Hermes profile. **Principle:** minimum viable change with senior-level validation; no technical task delegation to Rado.
 
 ## Change lifecycle — required process
-1. **Capture:** interpret voice transcription cautiously, paraphrase problem and desired observable behavior. Cross-check existing docs/code and avoid duplicating existing features. Log a concise issue/decision note.
+1. **Capture:** interpret the text request, paraphrase problem and desired observable behavior. Cross-check existing docs/code and avoid duplicating existing features. Log a concise issue/decision note.
 2. **Clarify:** if something would irreversibly alter gameplay rules, lose data, expose secrets, incur charges, or could reasonably be implemented in materially different ways, ask Rado **one** ordinary-language question. Otherwise note a default assumption and proceed.
 3. **Prioritize (80/20):** describe MVP, one or two deferred enhancements, who benefits and what success looks like; reject cosmetic rabbit holes unless specifically requested.
 4. **Design:** write executable acceptance scenarios and failure cases (including cheating/visibility/reconnect). Choose low-complexity implementation consistent with Go+React architecture. Update a short ADR for nontrivial architecture decisions.
