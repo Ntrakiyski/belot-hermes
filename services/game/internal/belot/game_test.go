@@ -146,46 +146,32 @@ func TestCardPoints(t *testing.T) {
 	}
 }
 
-// Total card points in a deal are 152 (trump contract) incl. last trick.
-func TestFullDealTotals152AndMatchAdvances(t *testing.T) {
-	for _, c := range []Contract{Hearts, NoTrump, AllTrump} {
-		g := newPlaying(t, c)
+func TestFullDealExactTotals(t *testing.T) {
+	for _, tt := range []struct {
+		c     Contract
+		total int
+	}{{Hearts, 162}, {NoTrump, 130}, {AllTrump, 258}} {
+		g := newPlaying(t, tt.c)
+		plays := 0
 		for g.Phase == PhasePlaying {
 			legal, _ := g.LegalCards(g.Turn)
 			if len(legal) == 0 {
-				t.Fatalf("%s: no legal card for seat %d", c, g.Turn)
+				t.Fatal("no legal card")
 			}
 			if err := g.Play(g.Turn, legal[0]); err != nil {
 				t.Fatal(err)
 			}
+			plays++
 		}
-		want := 152
-		if c == NoTrump {
-			want = 152 // raw is 152 before the x2; captured stays 152
+		if total := g.Captured[0] + g.Captured[1]; total != tt.total {
+			t.Fatalf("%s: got %d captured points want %d", tt.c, total, tt.total)
 		}
-		if c == AllTrump {
-			want = 152
+		if plays != 32 || g.Tricks[0]+g.Tricks[1] != 8 {
+			t.Fatalf("%s: plays=%d tricks=%v", tt.c, plays, g.Tricks)
 		}
-		if g.Captured[0]+g.Captured[1] != want && g.Captured[0]+g.Captured[1] != want-2*0 {
-			// all-trump/no-trump totals differ by variant; just require plausibility
-			if tot := g.Captured[0] + g.Captured[1]; tot < 100 || tot > 270 {
-				t.Fatalf("%s: implausible total %d", c, tot)
-			}
+		if g.Result == nil {
+			t.Fatal("no deal result")
 		}
-		if g.Result == nil || g.Result.Awarded[0]+g.Result.Awarded[1] == 0 {
-			t.Fatalf("%s: no score awarded", c)
-		}
-		if g.Tricks[0]+g.Tricks[1] != 8 {
-			t.Fatal("expected 8 tricks")
-		}
-	}
-	g := newPlaying(t, Hearts)
-	for g.Phase == PhasePlaying {
-		l, _ := g.LegalCards(g.Turn)
-		_ = g.Play(g.Turn, l[0])
-	}
-	if g.Captured[0]+g.Captured[1] != 162 {
-		t.Fatalf("trump contract must total 162, got %d", g.Captured[0]+g.Captured[1])
 	}
 }
 
@@ -203,11 +189,11 @@ func TestIllegalPlayDoesNotMutate(t *testing.T) {
 	}
 }
 
-func TestScoringContractFailsNeedsMoreThanHalf(t *testing.T) {
-	g := &Game{Contract: Hearts, Bidder: 0, Mult: 1, Captured: [2]int{76, 76}, Tricks: [2]int{4, 4}, Target: 151, Winner: -1}
+func TestScoringTieHangsInsteadOfFailing(t *testing.T) {
+	g := &Game{Contract: Hearts, Bidder: 0, Mult: 1, Captured: [2]int{81, 81}, Tricks: [2]int{4, 4}, Target: 151, Winner: -1}
 	g.finishDeal()
-	if g.Result.Succeeded || g.Result.Awarded[1] != 16 {
-		t.Fatalf("tie should fail the bidder: %+v", g.Result)
+	if !g.Result.Hanging || g.Result.Succeeded || g.Result.Awarded != ([2]int{0, 8}) || g.Pending != 8 {
+		t.Fatalf("tie must carry bidder points: %+v", g.Result)
 	}
 }
 

@@ -30,3 +30,8 @@ A separate route behind DEMO role authorization, e.g. `/dev/matches/:id`:
 
 ## Evidence standard
 For each bug report save ruleset version, event timeline with hidden hands redacted for public sharing, deterministic seed **only for non-live test games**, expected/actual result and regression test ID. Preserve seed only for authorized sandbox fixtures.
+
+
+## v0.3 implemented evidence
+
+`bg-0.3.0` adds source-linked declaration/scoring fixtures and 10,000 deterministic six-contract deal simulations under `services/game/internal/belot/`, plus virtual-time practice-match/collection-gate regressions under `cmd/server/`. The player-visible score ledger and held winning trick support ordinary DEMO checking. They are **not** the privileged replay inspector described above; no full-hand debug endpoint was added. See [v0.3 comparison and remaining limits](13-playable-v0.3.md).
