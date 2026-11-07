@@ -15,7 +15,7 @@ This document states the **business vision, human–agent relationship, and non-
 
 ## 2. One Hermes builder, one conversational front door
 - Rado works with **one dedicated Belot Hermes profile**, isolated from other VPS agents/projects.
-- **Telegram voice and text in plain English** are the primary inputs. Telegram should support the core end-to-end workflow from a phone. Discord may be integrated later, but must not replace Telegram by default.
+- **Telegram text in plain English** are the primary inputs. Telegram should support the core end-to-end workflow from a phone. Discord may be integrated later, but must not replace Telegram by default.
 - Hermes autonomously selects skills and tools; Rado should not have to invoke specialist agents or remember skill names.
 - The dedicated Hermes profile is provisioned on the owner's VPS; this repository supplies its instructions and workflows, **not** evidence that it is already installed.
 

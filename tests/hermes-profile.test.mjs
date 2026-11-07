@@ -18,9 +18,14 @@ test('persona sync preserves the live file on missing input and backs up a compl
     assert.notEqual(run().status, 0);
     assert.equal(await readFile(join(profile, 'SOUL.md'), 'utf8'), 'original');
     await writeFile(join(source, 'SOUL-profile-appendix.md'), 'appendix\n');
+    await mkdir(join(source, 'profile-skills/bridge'), { recursive: true });
+    assert.notEqual(run().status, 0);
+    assert.equal(await readFile(join(profile, 'SOUL.md'), 'utf8'), 'original');
+    await writeFile(join(source, 'profile-skills/bridge/SKILL.md'), 'managed bridge');
     assert.equal(run().status, 0);
     assert.equal(await readFile(join(profile, 'SOUL.md'), 'utf8'), 'persona\nappendix\n');
     assert.equal(await readFile(join(profile, 'SOUL.md.bak'), 'utf8'), 'original');
+    assert.equal(await readFile(join(profile, 'skills/bridge/SKILL.md'), 'utf8'), 'managed bridge');
   } finally {
     await rm(dir, { recursive: true, force: true });
   }

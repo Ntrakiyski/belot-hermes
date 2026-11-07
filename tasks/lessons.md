@@ -55,3 +55,17 @@ Mistake: First v0.3 UI draft kept first-card declaration IDs selected for later 
 Why it happened: Selection reset only on table/deal change, not after the one-shot action succeeded.
 Rule for next time: Clear one-shot input state after accepted actions and filter submitted options against the current server capability list.
 Example check: Announce with the first card, then play the second card in the same deal without a declaration error.
+
+## 2026-11-07 - Distinguish missing CLI from missing GitHub access
+
+Mistake: Earlier audit highlighted absent gh/profile tokens without first establishing whether Hermes uses a different configured GitHub integration.
+Why it happened: Assumed one authentication/tool path was the only available path.
+Rule for next time: Respect confirmed access, inspect the actual integration, and test a harmless permitted operation instead of inferring a blocker from one missing binary.
+Example check: Confirm the dedicated agent can inspect this repository/PRs using its existing tools; do not create or request replacement credentials.
+
+## 2026-11-07 - Check infrastructure capacity before adding optional components
+
+Mistake: Started a disposable transcription environment before reviewing the disk-usage command's result; the VPS had no normal free space.
+Why it happened: Capacity check and installation were placed in one command instead of making installation conditional on the observed result.
+Rule for next time: Inspect capacity and confirm the current feature scope before any dependency/model installation; keep optional additions isolated and removable.
+Example check: Read df/available-memory output first, then decide whether a requested component should be installed at all.

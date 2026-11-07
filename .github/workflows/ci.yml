@@ -15,7 +15,7 @@ jobs:
         with:
           go-version-file: services/game/go.mod
       - working-directory: services/game
-        run: go test ./...
+        run: go test -race ./... && go vet ./...
   react-vite:
     runs-on: ubuntu-latest
     steps:

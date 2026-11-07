@@ -81,5 +81,5 @@ For Coolify use **only `docker-compose.yaml`**, assign domains to service `belot
 1. Independently verify rules with golden fixtures and a secured DEMO inspector.
 2. Implement authenticated identities, real multiplayer connectivity and reconnect handling.
 3. Build public matchmaking, private room permissions, friends and invitations.
-4. Verify Rado's Telegram text/voice → feature → tests → DEMO workflow and release gates.
+4. Verify Rado's Telegram text → feature → tests → DEMO workflow and release gates.
 5. Promote a tested version to MAIN only after explicit Rado approval and human review.

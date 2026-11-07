@@ -22,7 +22,7 @@
 
 **Success signals:** mean time to detect/recover, queue SLA, scoring divergence rate, audit completeness, release rollback success.
 
-## Persona 3 — Owner and Hermes developer: voice-to-demo-to-main
+## Persona 3 — Owner and Hermes developer: text-to-demo-to-main
 
 `Rado Telegram message -> Hermes task issue -> isolated branch -> implement -> tests incl. gameplay QA -> review -> demo PR -> CI -> deploy DEMO -> report link/test proof -> owner accepts -> protected main promotion PR and human review -> deploy MAIN -> smoke/rollback-ready`.
 

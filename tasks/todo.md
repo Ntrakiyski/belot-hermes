@@ -80,20 +80,20 @@ Compare the supplied iOS Belot reference with our game, verify Bulgarian rules s
 - [x] Define v0.3 API/gameplay contract and acceptance cases before implementation.
 - [x] Implement tested rules fixes, paced server transitions and a usable Bulgarian card-table UI.
 - [x] Verify full deals/matches, four-seat visibility, invalid actions, reloads and phone/desktop flow.
-- [ ] Review, version, publish and deploy the authorized DEMO update after green checks; leave MAIN unchanged.
+- [x] Review, version, publish and deploy the authorized DEMO update after green checks; leave MAIN unchanged.
 
 ## Verification
 - [x] Independent source comparison and regression fixtures
 - [x] Go race tests, Node checks, frontend build and Compose smoke
 - [x] Real browser practice and guest room flow; screenshots and console health
-- [ ] Actual DEMO commit/UI/API checked if deployed
-- [ ] Remaining rule variants/production gaps documented
+- [x] Actual DEMO commit/UI/API checked if deployed
+- [x] Remaining rule variants/production gaps documented
 
 ## Risks
 Scoring corrections change the DEMO ruleset. Deployment resets in-memory tables. Current guest rooms do not authenticate distinct human accounts. Source reference is a different national variant, and a playable release must not imply independently certified rules.
 
 ## Review
-In progress.
+Released v0.3.0 to DEMO through PR #6 after green PR checks and independent review. Confirmed rule omissions and unreadable synchronous bot flow were corrected together; no reference code/assets copied. All user-facing results and limits below are evidence-based.
 
 
 ### v0.3 verification before publication
@@ -104,3 +104,68 @@ In progress.
 - No MAIN changes. Live pre-v0.3 image retained as belot-hermes-demo:pre-v030-20261107 for rollback.
 
 Browser checks completed: guest invite prefilled the table code, a second tab joined without bots, both lobbies updated2/4 and reload restored the same seat.390×844 and1280×900 had no horizontal page overflow or console errors. Screenshots /tmp/belot-v03-mobile.png and /tmp/belot-v03-desktop.png. Belot toggle and rare four-plus-shorter-sequence UI were not encountered in random browser hands; deterministic engine fixtures cover those rules, not their visual interactions.
+
+
+### v0.3 release evidence
+
+- Feature eb752331603ef2565daa00c72dc1f1a2f91e6f38 published and PR https://github.com/Ntrakiyski/belot-hermes/pull/6 merged into demo at2998b7a4433b1151bad72e5a4a4a9477d404f879. All four PR CI jobs passed, including the full Compose gameplay check. Independent reviewer found no remaining blockers after declaration selection fix.
+- Coolify webhook deployment959ekwkk6vusw8a8crfoyrrn finished on that exact merge commit. Docker Compose service is healthy; HTTPS health reports version0.3.0 and practice enabled. Previous live image retained as belot-hermes-demo:pre-v030-20261107. MAIN unchanged.
+- Live full-deal HTTP smoke passed: private seats/declaration options, invalid action rejection, held tricks, next deal and paced practice completion. Default bots-off local Compose smoke also passed.
+- Live browser: new home/version, immediate explicit practice, paced bidding, all-trump hand, explicit belot checkbox on first Q-spades awarded exactly20; later K-spades played successfully without duplicate belot. Completed four-card trick showed winner Elena/+17, controls disabled while collecting, no console warnings/errors. Screenshot /tmp/belot-v030-live.png. Phone screenshot /tmp/belot-v03-mobile.png and desktop /tmp/belot-v03-desktop.png reflect the same tested bundle.
+- Ordinary first-card declaration, full visible8trick deal/result/next deal, guest invite join and reload verified locally.40complete practice matches were simulated under virtual deadlines and10,000deal invariants pass. Rare four-plus-shorter-sequence UI interaction was not manually encountered; engine fixtures cover valid/invalid combinations. No every-house-rule certification, authenticated accounts/public matchmaking, persistence or privileged replay inspector is claimed.
+- Release notes/evidence added to PR #6. Operational notes after publication remain local task records. No live Hermes persona change or Telegram messages in this release.
+
+
+# Hermes Telegram operations verification
+
+## Goal
+Make the dedicated Rado Hermes profile capable of maintaining and improving v0.3 from Telegram, using its existing GitHub access and merge-triggered Coolify deployment.
+
+## Constraints
+- User confirms GitHub access; retain credentials and access boundaries, do not create new auth or treat absent gh as proof of no access.
+- Only the dedicated Belot profile/workspace may change; preserve remote working branches and untracked work.
+- Keep Telegram numeric allowlist, sandbox isolation and MAIN approval boundary intact.
+- Inspect only necessary sanitized configuration/state; never print tokens, conversation history or player data.
+- Live instructions need to use current repo/skills and automatic Coolify deployment, not Pages/manual hosting.
+
+## Steps
+- [ ] Inspect live profile, skills discovery, sandbox tools, Telegram text route and gateway health.
+- [ ] Correct minimal skills/persona/test/release guidance for the actual v0.3 workflow.
+- [ ] Apply reviewed instructions to the dedicated live profile/workspace safely; restart only if needed and idle.
+- [ ] Test actual agent tool/skill behavior and Telegram request/response path; distinguish simulated checks from real delivery.
+- [ ] Publish reviewed changes, verify deployment continuity and record evidence/remaining blocks.
+
+## Verification
+- [ ] Profile gateway and Telegram connection/allowlist
+- [ ] Current repo, trusted skills and runtime tools
+- [ ] Go/Node/frontend tests runnable inside sandbox
+- [ ] Agent follows request -> plan -> test -> PR -> CI -> merged DEMO -> live verification
+- [ ] Text actual channel test or explicit limitation
+
+## Review
+In progress. Initial direct SSH route100.123.30.5 timed out; investigate connectivity before modifying live state.
+
+
+## Steering: no voice support; investigate disk usage
+
+User explicitly removed voice support from scope and prioritized why the VPS has no space. No voice configuration was activated. Remove only the disposable STT environment/fixtures created during this audit. Continue the previously authorized Hermes text/skills maintenance after the disk investigation; do not install or configure transcription.
+
+- [x] Identify disk/inode usage, Docker cache/images/volumes, logs and deleted-open files using metadata only.
+- [x] Explain the primary consumers and growth mechanism; distinguish old buildup from this audit's additions.
+- [x] Verify reclaimed capacity and running services; recommend only targeted further changes.
+
+### Disk investigation evidence
+
+- Root filesystem is 75GiB, 70GiB used, 2.3GiB available (97%); inodes 34%. It was already full before this audit's temporary speech environment.
+- Largest physical consumers: containerd 18GiB (snapshots ~14.6GiB, blobs ~3.4GiB), root user tools/caches ~21.8GiB, other project home directories ~11.4GiB. Docker volumes ~2.1GiB; logs ~0.5GiB. No material deleted-open file leak. Docker image/build figures overlap physical storage and must not be summed as independent consumption.
+- Deleted only unused build cache older than 7 days then older than 24 hours: Docker reported 2.252GB + 984.7MB reclaimed. Removed the isolated 474MiB speech environment/fixtures created during this audit; no transcription config was enabled.
+- BuildKit uses permissive default retention (up to ~55.9GiB cache, one policy retaining 60 days); no scheduled prune was found. Old editor/browser/package caches and project checkouts compound the pressure. No databases, volumes, project checkouts, conversations or running containers deleted.
+- Further image/cache pruning needs a targeted retention decision; unreferenced images may be rollback images and unused volumes may hold data. Remaining 2.3GiB headroom is insufficient for comfortable builds.
+
+### Hermes verification evidence
+
+- Replaced stale copied MVP/Pages knowledge with two managed profile bridges and a repo-owned maintenance skill. Backed up the live persona/config/old skills and archived the competing untracked working-session skill outside discovery. Preserved untracked frontend lockfile and old feature branch.
+- Native Hermes config loader confirmed drop_pending_on_cold_boot=false before an idle-only dedicated gateway restart. Service active and Telegram connected afterward; allowlist and credentials unchanged.
+- Actual configured Hermes headless probe (source=tool, no messages/edits) automatically read maintenance/release/profile skills, found v0.3.0 and the current checkout, described correct tests/automatic Coolify path/MAIN gate, and correctly flagged CI race guidance pending publication. This proves tool/skill routing, not Telegram delivery or PR creation.
+- Actual sandbox: Go 1.23 ordinary tests and vet, all 10 Node checks, React TypeScript/Vite build passed. Local updated profile-sync regression and Node checks passed. Race checks run in CI, not the compiler-free sandbox.
+- Text-only steering applied to current charter, persona, user guide, setup and intent skill. Voice is excluded. Real Telegram user request/reply and unauthorized sender rejection remain unverified; no chat history read or Telegram messages sent by this audit.
