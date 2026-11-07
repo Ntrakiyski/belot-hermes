@@ -8,15 +8,19 @@ import (
 	"time"
 )
 
+const appVersion = "0.3.0"
+
 func main() {
+	tables := newStore()
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		_ = json.NewEncoder(w).Encode(map[string]any{
-			"status": "ok", "service": "belot-go-engine", "multiplayerReady": false, "practiceTables": true,
+			"status": "ok", "service": "belot-go-engine", "multiplayerReady": false, "practiceTables": tables.practiceEnabled, "practiceEnabled": tables.practiceEnabled, "version": appVersion,
 		})
 	})
-	newStore().routes(mux)
+	tables.routes(mux)
+	go tables.run()
 	if dir := os.Getenv("STATIC_DIR"); dir != "" {
 		mux.Handle("/", http.FileServer(http.Dir(dir)))
 	}

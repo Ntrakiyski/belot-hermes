@@ -11,3 +11,5 @@
 Changes to architecture should add a dated entry describing trade-off, rejected options, security impact and reversible migration.
 
 - **2026-11-07 — Compose on Coolify:** retain the existing single-image Go + React build, add a one-service Compose manifest with no host ports, and use a loopback port override locally. No unused database/Redis. Bots default off. Git-based Coolify deployment replaces static Pages instructions; hosting migration and live persona sync require operator authorization. Container replacement loses in-memory tables, so migrate while testers are idle. MAIN promotion remains separately gated.
+
+- **2026-11-07 — Playable v0.3:** independently adapt observable turns, stable table layout and declaration/score feedback from the supplied Croatian iOS reference; do not copy its code/assets or national variant. Keep Go/React and guest rooms, introduce server-owned bot deadlines and a collection gate, pin Bulgarian corrections to `bg-0.3.0`, and test deterministic fixtures plus complete matches before DEMO. Accounts/WebSockets/persistence remain separate milestones; MAIN remains protected.

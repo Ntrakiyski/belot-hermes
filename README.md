@@ -1,6 +1,6 @@
 # Belot — Hermes-managed Bulgarian multiplayer card game
 
-**DEMO engineering build · Public repo · Guest tables and optional practice bots, not the authenticated multiplayer product.**
+**v0.3.0 · Bulgarian Belot guest tables and explicit practice · Public repo · Authenticated multiplayer remains a separate milestone.**
 
 ## Product contract
 
@@ -22,11 +22,11 @@
 
 ## What's implemented today
 
-- Go rules engine and HTTP table API: guest table codes, four seats, bidding, legal card play, deal scoring and next deal. Tables live in memory and disappear on restart. Rules have local tests, not independent certification of every Bulgarian variant.
-- React UI for creating/joining guest tables and playing deals. Accounts, public matchmaking, friends, reconnect/forfeit policy and the secured rules inspector remain unimplemented.
-- Optional **explicit practice bots**, enabled server-side only with `ENABLE_PRACTICE_BOTS=1` on DEMO. Default is off; never enable on MAIN. The current UI still shows the practice button when the route is disabled.
+- Go-authoritative Bulgarian ruleset `bg-0.3.0`: 3+2+3 dealing, six contracts, contra/recontra, legal moves, first-card declarations, belot, hanging carry, contract-aware rounding and explained scoring to 151. Reference comparison, exact fixtures and 10,000 seeded deal invariants are documented in [the v0.3 review](docs/13-playable-v0.3.md); this is not certification of every house variant.
+- Bulgarian phone/desktop table with one-click explicit practice, friend-room invite links, paced bot turns, visible four-card trick/winner, legal-action controls, declarations, score ledger and match history. Tables remain in memory and disappear on restart. Accounts, public matchmaking, friends, reconnect/forfeit policy and a privileged replay inspector remain unimplemented.
+- Optional **explicit practice bots**, enabled server-side only with `ENABLE_PRACTICE_BOTS=1` on DEMO. Default is off; never enable on MAIN. The UI reads the runtime capability and disables practice when unavailable; guest friend tables never silently fill with bots.
 - One Docker image serves React and Go on port 3000; Docker Compose reuses that image build. No database or Redis is used yet.
-- Go tests, React build, legacy Node checks and a Compose HTTP smoke workflow. CI configuration is not evidence that a particular run passed.
+- Go race tests, deterministic rules/declaration fixtures, complete-match timing checks, React build, legacy Node checks and a Compose HTTP smoke through a full paced practice deal. CI configuration is not evidence that a particular run passed.
 - Dedicated Telegram Hermes profile documented under `ops/hermes/`; see the [operations runbook](docs/12-coolify-operations.md) for verified state, gaps and migration.
 
 ## Local development
